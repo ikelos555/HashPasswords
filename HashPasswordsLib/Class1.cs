@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HashPasswordsLib
 {
-    public class HashPassword
+    public class Class1
     {
         public HashPassword() 
         {
