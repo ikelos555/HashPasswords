@@ -8,7 +8,7 @@ namespace HashPasswordsLib
 {
     public class HashPassword
     {
-        public HashPassword()
+        public HashPassword() 
         {
                 
         }
