@@ -8,6 +8,7 @@ namespace HashPasswordsLib
 {
     public class HashPasswords
     {
+        public void MethodB() { }
         public void MethodA() { }
     }
 }
