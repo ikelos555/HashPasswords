@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HashPasswordsLib;
 
 namespace HashPasswords
 {
@@ -10,6 +7,20 @@ namespace HashPasswords
     {
         static void Main(string[] args)
         {
+            var hash = HashPasswordsLib.HashPasswords.HashPassword("hello");
+
+            Console.WriteLine("Hashed password:\n");
+            foreach (var s in hash.Hash)
+            {
+                Console.Write(s);
+            }
+
+            Console.WriteLine("\n\nSalt:\n");
+            foreach (var f in hash.Salt)
+            {
+                Console.Write(f);
+            }
+            Console.Read();
         }
     }
 }
