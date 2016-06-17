@@ -11,28 +11,32 @@ namespace HashPasswordsLib
     /// </summary>
     public static class HashPasswords
     {
-        private static RNGCryptoServiceProvider rndm = new RNGCryptoServiceProvider();
-        private static SHA256 sha  = SHA256.Create();
+        private  static RNGCryptoServiceProvider rndm = new RNGCryptoServiceProvider();
+        private static byte[] _salt = new byte[32];
 
-        private static byte[] Salt = new byte[32];
-
-        /// <summary>
-        /// Hash a cleartext password with SHA256 bit
-        /// </summary>
-        /// <param name="password"></param>
-        /// <returns>HashObject</returns>
         public static HashObject HashPassword(string password)
         {
+            var sha = SHA256.Create();
             var hashedPass = new List<byte>();
 
-            rndm.GetBytes(Salt);
+            rndm.GetBytes(_salt);
             var clearTextPass = Encoding.ASCII.GetBytes(password);
 
-            hashedPass.AddRange(Salt);
+            hashedPass.AddRange(_salt);
             hashedPass.AddRange(clearTextPass);
 
-            return new HashObject(Salt, sha.ComputeHash(hashedPass.ToArray()));
+            return new HashObject(_salt, sha.ComputeHash(hashedPass.ToArray()));
         }
-            
+
+        public static HashObject HashPasswordKeyStretched(string password, int iterations)
+        {
+            rndm.GetBytes(_salt);
+
+            using (var rfc = new Rfc2898DeriveBytes(password, _salt, iterations))
+            {
+                var hashValue = rfc.GetBytes(32);
+                return new HashObject(_salt, hashValue);
+            }
+        }
     }
 }

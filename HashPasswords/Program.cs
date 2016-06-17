@@ -7,19 +7,20 @@ namespace HashPasswords
     {
         static void Main(string[] args)
         {
-            var hash = HashPasswordsLib.HashPasswords.HashPassword("hello");
+            var hash = HashPasswordsLib.HashPasswords.HashPasswordKeyStretched("hello", 1);
 
-            Console.WriteLine("Hashed password:\n");
+            Console.WriteLine("Hashed password: \n");
             foreach (var s in hash.Hash)
             {
                 Console.Write(s);
             }
 
-            Console.WriteLine("\n\nSalt:\n");
+            Console.WriteLine("\n\nSalt: \n");
             foreach (var f in hash.Salt)
             {
                 Console.Write(f);
             }
+
             Console.Read();
         }
     }
